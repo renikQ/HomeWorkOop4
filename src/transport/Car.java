@@ -3,10 +3,12 @@ package transport;
 public class Car extends Transport implements Competing {
     private double bestLeapTime;
     private int maxSped;
-    public Car(String brand, String model, double engineVolume, double bestLeapTime, int maxSped) {
+    private final BodyType bodyType;
+    public Car(String brand, String model, double engineVolume, double bestLeapTime, int maxSped, BodyType bodyType) {
         super(brand, model, engineVolume);
         this.bestLeapTime = bestLeapTime;
         setMaxSped(maxSped);
+        this.bodyType = bodyType;
     }
 
     @Override
@@ -24,6 +26,10 @@ public class Car extends Transport implements Competing {
         System.out.println("Максимальная скорость " + this.bestLeapTime + " км\\ч");
     }
 
+    public BodyType getBodyType() {
+        return bodyType;
+    }
+
     public double getBestLeapTime() {
         return bestLeapTime;
     }
@@ -38,5 +44,15 @@ public class Car extends Transport implements Competing {
 
     public void setMaxSped(int maxSped) {
         this.maxSped = Math.max(maxSped, 60);
+    }
+
+    @Override
+    public void printType() {
+        if (this.bodyType != null) {
+            System.out.printf("Автомобиль %s %s %s ", getBrand(), getModel(), bodyType.toString());
+            System.out.println();
+        } else {
+            System.out.println("Данных по транспортному средству недостаточно");
+        }
     }
 }

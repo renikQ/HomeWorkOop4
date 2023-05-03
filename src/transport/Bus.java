@@ -3,10 +3,14 @@ package transport;
 public class Bus extends Transport implements Competing {
     private double bestLeapTime;
     private int maxSped;
-    public Bus(String brand, String model, double engineVolume, double bestLeapTime, int maxSped) {
+
+    private final PassengerCapacity passengerCapacity;
+
+    public Bus(String brand, String model, double engineVolume, double bestLeapTime, int maxSped, PassengerCapacity passengerCapacity) {
         super(brand, model, engineVolume);
         this.bestLeapTime = bestLeapTime;
         setMaxSped(maxSped);
+        this.passengerCapacity = passengerCapacity;
     }
 
     @Override
@@ -24,6 +28,10 @@ public class Bus extends Transport implements Competing {
         System.out.println("Максимальная скорость " + this.bestLeapTime + " км\\ч");
     }
 
+    public PassengerCapacity getPassengerCapacity() {
+        return passengerCapacity;
+    }
+
     public double getBestLeapTime() {
         return bestLeapTime;
     }
@@ -38,5 +46,15 @@ public class Bus extends Transport implements Competing {
 
     public void setMaxSped(int maxSped) {
         this.maxSped = Math.max(maxSped, 60);
+    }
+
+    @Override
+    public void printType() {
+        if (this.passengerCapacity != null) {
+            System.out.printf("Автобус %s %s %s", getBrand(), getModel(), passengerCapacity.toString());
+            System.out.println();
+        } else {
+            System.out.println("Данных по транспортному средству недостаточно");
+        }
     }
 }

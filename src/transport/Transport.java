@@ -47,6 +47,8 @@ public abstract class Transport {
         System.out.println(brand + model + " останавливается");
     }
 
+    public abstract void printType();
+
     @Override
     public String toString() {
         return "Transport{" +
